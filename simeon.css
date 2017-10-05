@@ -1,0 +1,85 @@
+body {
+  background: #232323;
+  margin: 0;
+  font-family: "Gisha";
+}
+
+h1 {
+  color: white;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  padding: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+button {
+  height: 100%;
+  border: none;
+  color: #232323;
+  background: none;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  outline: none;
+}
+
+button:hover {
+  background: #232323;
+  color: white;
+  transition: all 0.4s;
+}
+
+.container {
+  max-width: 500px;
+  margin: 25px auto;
+}
+
+.quad {
+  float: left;
+  width: 45%;
+  margin: 2.5%;
+  background: white;
+  padding-bottom: 45%;
+  opacity: 0.75;
+}
+
+.quad:hover {
+  opacity: 1.0;
+}
+
+.quad:active {
+  opacity: 0.5;
+}
+
+#topStrip {
+  text-align: center;
+  height: 30px;
+  background: white;
+}
+
+#message {
+  display: inline-block;
+  width: 15%;
+}
+
+#one {
+  border-top-left-radius: 100%;
+  background: rgb(46, 204, 64);
+}
+
+#two {
+  border-top-right-radius: 100%;
+  background: rgb(255, 65, 54);
+}
+
+#three {
+  border-bottom-left-radius: 100%;
+  background: rgb(255, 220, 0);
+}
+
+#four {
+  border-bottom-right-radius: 100%;
+  background: rgb(0, 116, 217);
+}
+
