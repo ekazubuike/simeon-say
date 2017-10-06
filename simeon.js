@@ -1,22 +1,25 @@
 //select all four divs
-var quads = document.querySelectorAll(".quad");
+const quads = document.querySelectorAll(".quad");
+
+const modeBtns = document.querySelectorAll(".mode");
+
 //store sounds in array
-var clay = new Howl({
+const clay = new Howl({
   src: ['sounds/clay.mp3']
 });
-var moon = new Howl({
+const moon = new Howl({
   src: ['sounds/moon.mp3']
 });
-var ufo = new Howl({
+const ufo = new Howl({
   src: ['sounds/ufo.mp3']
 });
-var strike = new Howl({
+const strike = new Howl({
   src: ['sounds/strike.mp3']
 });
-var squiggle = new Howl({
+const squiggle = new Howl({
   src: ['sounds/squiggle.mp3']
 });
-var sounds = [clay, moon, ufo, strike];
+const sounds = [clay, moon, ufo, strike];
 
 //iterate over divs, assigning unique sound to each one on click
 for (let i=0; i<quads.length;i++) {
@@ -28,4 +31,28 @@ for (let i=0; i<quads.length;i++) {
 document.querySelector("#newGame").addEventListener("click",function(){
   squiggle.play();
 });
+
+function setupMode(){
+	for (let i = 0; i < modeBtns.length; i++) {
+		modeBtns[i].addEventListener("click", function(){
+			modeBtns[0].classList.remove("selected");
+			modeBtns[1].classList.remove("selected");
+			this.classList.add("selected");
+			if(this.textContent === "hard mode") {
+				quads[0].classList.add("rotate1");
+				quads[1].classList.add("rotate2");
+				quads[2].classList.add("rotate3");
+				quads[3].classList.add("rotate4");
+			} else {
+				quads[0].classList.remove("rotate1");
+				quads[1].classList.remove("rotate2");
+				quads[2].classList.remove("rotate3");
+				quads[3].classList.remove("rotate4");
+			}
+		});
+	}
+
+}
+
+setupMode();
 

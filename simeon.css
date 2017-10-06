@@ -32,6 +32,7 @@ button:hover {
 
 .container {
   max-width: 500px;
+  height: 100%;
   margin: 25px auto;
 }
 
@@ -52,10 +53,16 @@ button:hover {
   opacity: 0.5;
 }
 
+.selected {
+  background: #232323;
+  color: white;
+}
+
 #topStrip {
   text-align: center;
   height: 30px;
   background: white;
+  font-size: 0;
 }
 
 #message {
@@ -82,4 +89,113 @@ button:hover {
   border-bottom-right-radius: 100%;
   background: rgb(0, 116, 217);
 }
+
+.rotate1 {
+  animation: rotation1 5s infinite linear;
+}
+
+.rotate2 {
+  animation: rotation2 5s infinite linear;
+}
+
+.rotate3 {
+  animation: rotation3 5s infinite linear;
+}
+
+.rotate4 {
+  animation: rotation4 5s infinite linear;
+}
+
+@keyframes rotation1 {
+  0%{
+    transform: rotate(0deg);
+    transform-origin: bottom right;
+  }
+  25%{
+    transform: rotate(90deg);
+    transform-origin: bottom right;
+  }
+  50%{
+    transform: rotate(180deg);
+    transform-origin: bottom right;
+  }
+  75%{
+    transform: rotate(270deg);
+    transform-origin: bottom right;
+  }
+  100%{
+    transform: rotate(360deg);
+    transform-origin: bottom right;
+  }
+}
+
+@keyframes rotation2 {
+  0%{
+    transform: rotate(0deg);
+    transform-origin: bottom left;
+  }
+  25%{
+    transform: rotate(90deg);
+    transform-origin: bottom left;
+  }
+  50%{
+    transform: rotate(180deg);
+    transform-origin: bottom left;
+  }
+  75%{
+    transform: rotate(270deg);
+    transform-origin: bottom left;
+  }
+  100%{
+    transform: rotate(360deg);
+    transform-origin: bottom left;
+  }
+}
+@keyframes rotation3 {
+  0%{
+    transform: rotate(0deg);
+    transform-origin: top right;
+  }
+  25%{
+    transform: rotate(90deg);
+    transform-origin: top right;
+  }
+  50%{
+    transform: rotate(180deg);
+    transform-origin: top right;
+  }
+  75%{
+    transform: rotate(270deg);
+    transform-origin: top right;
+  }
+  100%{
+    transform: rotate(360deg);
+    transform-origin: top right;
+  }
+}
+
+@keyframes rotation4 {
+  0%{
+    transform: rotate(0deg);
+    transform-origin: top left;
+  }
+  25%{
+    transform: rotate(90deg);
+    transform-origin: top left;
+  }
+  50%{
+    transform: rotate(180deg);
+    transform-origin: top left;
+  }
+  75%{
+    transform: rotate(270deg);
+    transform-origin: top left;
+  }
+  100%{
+    transform: rotate(360deg);
+    transform-origin: top left;
+  }
+}
+
+
 
