@@ -1,7 +1,12 @@
-//select all four divs
-const quads = document.querySelectorAll(".quad");
+//DOM selectors
+const	quads 		= document.querySelectorAll(".quad"),
+		modeBtns 	= document.querySelectorAll(".mode"),
+		container	= document.querySelector(".container"),
+		newGame		= document.querySelector("#newGame");
 
-const modeBtns = document.querySelectorAll(".mode");
+//variables
+let 	counter = 0,
+		event;
 
 //store sounds in array
 const clay = new Howl({
@@ -21,15 +26,55 @@ const squiggle = new Howl({
 });
 const sounds = [clay, moon, ufo, strike];
 
-//iterate over divs, assigning unique sound to each one on click
-for (let i=0; i<quads.length;i++) {
-  quads[i].addEventListener("click", function(){
-    sounds[i].play();
-  });
+
+function setupQuads(){
+	//iterate over divs, assigning unique sound to each one on click
+	for (let i=0; i<quads.length;i++) {
+	  quads[i].addEventListener("mousedown", function(){
+	    sounds[i].play();
+	  });
+	}
+	//opacity effects
+	quads.forEach(function(quad){
+		quad.addEventListener("mouseover", function(){
+			this.style.opacity = 1.0;
+		});
+		quad.addEventListener("mouseout", function(){
+			this.style.opacity = 0.75;
+		});
+		quad.addEventListener("mousedown", function(){
+			this.style.opacity = 0.5;
+		});
+		quad.addEventListener("mouseup", function(){
+			this.style.opacity = 1.0;
+		});
+	});
 }
 
-document.querySelector("#newGame").addEventListener("click",function(){
+setupQuads();
+
+// function triggerEvent(el, type){
+//    if ('createEvent' in document) {
+//         // modern browsers, IE9+
+//         var e = document.createEvent('HTMLEvents');
+//         e.initEvent(type, false, true);
+//         el.dispatchEvent(e);
+//     } else {
+//         // IE 8
+//         var e = document.createEventObject();
+//         e.eventType = type;
+//         el.fireEvent('on'+e.eventType, e);
+//     }
+// }
+
+newGame.addEventListener("click",function(){
   squiggle.play();
+});
+
+//counter event listener
+container.addEventListener("click", function(){
+	counter++;
+	console.log(counter);
 });
 
 function setupMode(){
