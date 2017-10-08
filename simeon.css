@@ -45,6 +45,18 @@ button:hover {
   opacity: 0.75;
 }
 
+.highlight {
+  opacity: 1.0;
+}
+
+.dull {
+  opacity: 0.5;
+}
+
+.normal{
+  opacity: 0.75;
+}
+
 .selected {
   background: #232323;
   color: white;

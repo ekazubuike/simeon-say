@@ -2,11 +2,13 @@
 const	quads 		= document.querySelectorAll(".quad"),
 		modeBtns 	= document.querySelectorAll(".mode"),
 		container	= document.querySelector(".container"),
-		newGame		= document.querySelector("#newGame");
+		newGame		= document.querySelector("#newGame"),
+		replayBtn	= document.querySelector("#replayBtn");
 
 //variables
-let 	counter = 0,
-		event;
+let 	counter			= 0,
+		simeonSequence	= [0, 1, 2, 3],
+		playerSequence	= [];
 
 //store sounds in array
 const clay = new Howl({
@@ -26,6 +28,14 @@ const squiggle = new Howl({
 });
 const sounds = [clay, moon, ufo, strike];
 
+init();
+function init(){
+	setupMode();
+	setupQuads();
+	//sequence = [];
+	generateNext();
+	playSequence(0);
+}
 
 function setupQuads(){
 	//iterate over divs, assigning unique sound to each one on click
@@ -36,46 +46,54 @@ function setupQuads(){
 	}
 	//opacity effects
 	quads.forEach(function(quad){
-		quad.addEventListener("mouseover", function(){
-			this.style.opacity = 1.0;
-		});
-		quad.addEventListener("mouseout", function(){
-			this.style.opacity = 0.75;
-		});
 		quad.addEventListener("mousedown", function(){
-			this.style.opacity = 0.5;
+			this.classList.remove("normal");
+			this.classList.add("dull");
 		});
 		quad.addEventListener("mouseup", function(){
-			this.style.opacity = 1.0;
+			this.classList.remove("dull");
+			this.classList.add("normal");
 		});
 	});
 }
 
-setupQuads();
-
-// function triggerEvent(el, type){
-//    if ('createEvent' in document) {
-//         // modern browsers, IE9+
-//         var e = document.createEvent('HTMLEvents');
-//         e.initEvent(type, false, true);
-//         el.dispatchEvent(e);
-//     } else {
-//         // IE 8
-//         var e = document.createEventObject();
-//         e.eventType = type;
-//         el.fireEvent('on'+e.eventType, e);
-//     }
-// }
-
+//event listeners
+//newgame
 newGame.addEventListener("click",function(){
-  squiggle.play();
+	squiggle.play();
+	setTimeout(function(){
+		init();
+	}, 600);
 });
 
-//counter event listener
+//counter
 container.addEventListener("click", function(){
 	counter++;
-	console.log(counter);
 });
+
+//replay button
+replayBtn.addEventListener("click", function(){playSequence(0)});
+
+//generate random sequence
+function generateNext(){
+	simeonSequence.push(Math.floor(Math.random()*4));
+}
+
+//play sequence
+function playSequence(index){
+	if(simeonSequence.length > index) {
+		setTimeout(function(){
+			quads[simeonSequence[index]].classList.remove("normal");
+			quads[simeonSequence[index]].classList.add("highlight");
+			sounds[simeonSequence[index]].play();
+			setTimeout(function(){
+				quads[simeonSequence[index]].classList.remove("highlight");
+				playSequence(++index);
+			}, 500);
+		}, 500);
+	}
+}
+
 
 function setupMode(){
 	for (let i = 0; i < modeBtns.length; i++) {
@@ -96,8 +114,8 @@ function setupMode(){
 			}
 		});
 	}
-
 }
 
-setupMode();
+
+
 
