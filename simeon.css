@@ -1,7 +1,8 @@
 body {
   background: #232323;
   margin: 0;
-  font-family: "Gisha";
+  font-family: Gisha;
+  color: #232323;
 }
 
 h1 {
@@ -71,7 +72,9 @@ button:hover {
 
 #message {
   display: inline-block;
-  width: 15%;
+  width: 20%;
+  font-size: 14px;
+  font-family: Gisha, Tahoma;
 }
 
 #one {

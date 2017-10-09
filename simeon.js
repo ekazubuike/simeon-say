@@ -3,12 +3,13 @@ const	quads 		= document.querySelectorAll(".quad"),
 		modeBtns 	= document.querySelectorAll(".mode"),
 		container	= document.querySelector(".container"),
 		newGame		= document.querySelector("#newGame"),
-		replayBtn	= document.querySelector("#replayBtn");
+		replayBtn	= document.querySelector("#replayBtn"),
+		message		= document.querySelector("#message");
 
 //variables
 let 	counter			= 0,
-		simeonSequence	= [0, 1, 2, 3],
-		playerSequence	= [];
+		playerSequence	= [],
+		simeonSequence	= [];
 
 //store sounds in array
 const clay = new Howl({
@@ -32,17 +33,19 @@ init();
 function init(){
 	setupMode();
 	setupQuads();
-	//sequence = [];
+	simeonSequence = [];
 	generateNext();
 	playSequence(0);
+	playerSequence = [];
 }
 
 function setupQuads(){
-	//iterate over divs, assigning unique sound to each one on click
 	for (let i=0; i<quads.length;i++) {
-	  quads[i].addEventListener("mousedown", function(){
-	    sounds[i].play();
-	  });
+		//play sound on mousedown
+		quads[i].addEventListener("mousedown", function(){
+			sounds[i].play();
+		});
+		assignValues();
 	}
 	//opacity effects
 	quads.forEach(function(quad){
@@ -57,18 +60,24 @@ function setupQuads(){
 	});
 }
 
+function assignValues(){
+	playerSequence = [];
+	for (let i = 0; i < quads.length; i++){
+		quads[i].addEventListener("click", function(){
+				playerSequence.push(i);
+				checkSequence(playerSequence, simeonSequence);
+			});
+	}
+}
+
 //event listeners
 //newgame
 newGame.addEventListener("click",function(){
-	squiggle.play();
-	setTimeout(function(){
-		init();
-	}, 600);
-});
-
-//counter
-container.addEventListener("click", function(){
-	counter++;
+	message.innerHTML = "";
+	simeonSequence = [];
+	generateNext();
+	playSequence(0);
+	playerSequence = [];
 });
 
 //replay button
@@ -79,7 +88,7 @@ function generateNext(){
 	simeonSequence.push(Math.floor(Math.random()*4));
 }
 
-//play sequence
+//play machine sequence
 function playSequence(index){
 	if(simeonSequence.length > index) {
 		setTimeout(function(){
@@ -92,8 +101,7 @@ function playSequence(index){
 			}, 500);
 		}, 500);
 	}
-}
-
+}	
 
 function setupMode(){
 	for (let i = 0; i < modeBtns.length; i++) {
@@ -116,6 +124,15 @@ function setupMode(){
 	}
 }
 
-
+function checkSequence(arr1, arr2){
+	for(let i = 0; i < arr1.length; i++){
+			if (arr1[i] !== arr2[i]) {
+				return message.textContent = "WRONG PATTERN!";
+			}
+		} 
+	message.textContent = "CORRECT!";
+	generateNext();
+	playSequence(0);
+}
 
 
