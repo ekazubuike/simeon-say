@@ -61,7 +61,6 @@ function setupQuads(){
 }
 
 function assignValues(){
-	playerSequence = [];
 	for (let i = 0; i < quads.length; i++){
 		quads[i].addEventListener("click", function(){
 				playerSequence.push(i);
@@ -127,7 +126,8 @@ function setupMode(){
 function checkSequence(arr1, arr2){
 	for(let i = 0; i < arr1.length; i++){
 			if (arr1[i] !== arr2[i]) {
-				return message.textContent = "WRONG PATTERN!";
+				message.textContent = "WRONG PATTERN!";
+				
 			}
 		} 
 	message.textContent = "CORRECT!";
